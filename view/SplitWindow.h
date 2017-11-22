@@ -16,6 +16,7 @@ public:
     SplitWindow();
     ~SplitWindow() override;
 
+
 private:
     Gtk::Grid mainGrid; // Grid to pack elements into
     Gtk::Box headerBox;// Packed at top of mainGrid
