@@ -19,6 +19,9 @@ void TimerThread::pullData(Glib::ustring *str) {
 }
 
 void TimerThread::loopTimer(SplitWindow *window) {
+
+    timer_.start();
+
     while (!this->stopped_) {
 
         std::lock_guard<std::mutex> lock(this->mutex_);
@@ -29,6 +32,10 @@ void TimerThread::loopTimer(SplitWindow *window) {
             window->emit();
         }
     }
+
+    timer_.pause();
+    this->curTime = timer_.formatCurTime();
+    lastTime_ = timer_.elapsed();
     window->emit();
 }
 
@@ -47,4 +54,9 @@ sw::Timer TimerThread::getTimer() {
 
     std::lock_guard<std::mutex> lock(mutex_);
     return timer_;
+}
+
+void TimerThread::start() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    this->stopped_ = false;
 }

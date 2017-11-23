@@ -29,6 +29,8 @@ public:
     sw::Timer getTimer();
 
 
+    void start();
+
 private:
     mutable std::mutex mutex_;
     bool stopped_ = false;

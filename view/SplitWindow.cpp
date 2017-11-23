@@ -2,6 +2,7 @@
 // Created by drew on 11/20/17.
 //
 
+#include <iostream>
 #include "SplitWindow.h"
 #include "../util/SplitUtils.h"
 
@@ -11,7 +12,7 @@ SplitWindow::SplitWindow() :
         headerBox_(Gtk::ORIENTATION_HORIZONTAL),
         tableBox_(Gtk::ORIENTATION_VERTICAL),
         footerBox_(Gtk::ORIENTATION_HORIZONTAL),
-        stopwatchLabel_("00:00:00.000", true) {
+        stopwatchLabel_("00.000", true) {
 
     set_title("Splitty");
 
@@ -51,18 +52,44 @@ SplitWindow::SplitWindow() :
 
 }
 
-SplitWindow::~SplitWindow() = default;
+SplitWindow::~SplitWindow() {
+    timerThread_.stop();
+    if (counterThread_ && counterThread_->joinable())
+        counterThread_->join();
+    delete counterThread_;
+    std::cout << "Thread exited\n";
+}
 
 bool SplitWindow::on_key_press_event(GdkEventKey *key_event) {
 
-    //timerThread_.loopTimer(this);
+    if (key_event->keyval == GDK_KEY_space) {
+        if (!counterThread_) {
 
+            timerThread_.start();
+            counterThread_ = new std::thread([this] {
+                timerThread_.loopTimer(this);
+            });
+            std::cout << "Starting thread...\n";
+            return true;
+
+        } else
+            std::cout << "Thread already present!\n";
+    } else if (key_event->keyval == GDK_KEY_BackSpace) {
+
+        if (counterThread_) {
+            timerThread_.stop();
+        } else
+            std::cout << "Thread not running!\n";
+    }
     return Gtk::Window::on_key_press_event(key_event);
 }
 
 void SplitWindow::updateLabel() {
     Glib::ustring str;
+    //std::cout << "Pulling Data\n";
     timerThread_.pullData(&str);
+
+    //std::cout << str << "\n";
 
     if (str != stopwatchLabel_.get_text())
         stopwatchLabel_.set_text(str);
@@ -81,6 +108,7 @@ void SplitWindow::onDispatchEmit() {
             counterThread_->join();
         delete counterThread_;
         counterThread_ = nullptr;
+        std::cout << "Thread deleted!\n";
     }
     updateLabel();
 }

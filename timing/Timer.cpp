@@ -84,13 +84,15 @@ std::string sw::Timer::formatTime(unsigned long millis) {
 
     std::string str;
 
-    std::string remMillis = std::to_string(millis % 1000);
+    std::string remMillis = (millis % 1000) == 0 ? "" : std::to_string(millis % 1000);
+    while (remMillis.length() < 3)
+        remMillis = "0" + remMillis;
     millis /= 1000;
-    std::string seconds = std::to_string(millis % 60);
+    std::string seconds = (millis % 60) == 0 ? "00." : (std::to_string(millis % 60) + ".");
     millis /= 60;
-    std::string mins = std::to_string(millis % 60);
+    std::string mins = (millis % 60) == 0 ? "" : (std::to_string(millis % 60) + ":");
     millis /= 60;
-    std::string hours = std::to_string(millis);
+    std::string hours = millis == 0 ? "" : (std::to_string(millis) + ":");
 
-    return (hours + ":" + mins + ":" + seconds + "." + remMillis);
+    return (hours + mins + seconds + remMillis);
 }
