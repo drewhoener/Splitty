@@ -1,27 +1,27 @@
 #include <iostream>
 #include <gtkmm.h>
 #include <thread>
-#include "util/Timer.h"
+#include "timing/Timer.h"
+#include "view/SplitWindow.h"
 
 using namespace std::chrono_literals;
 
-void timerTests();
+int timerTests();
 
 int main(int argc, char* argv[]) {
 
     std::cout << "Hello, World!" << '\n';
 
-    //auto app = Gtk::Application::create(argc, argv, "com.drewhoener.splitty");
+    auto app = Gtk::Application::create(argc, argv, "com.drewhoener.splitty");
 
-    //SplitWindow window;
+    SplitWindow window;
 
-    timerTests();
+    //return timerTests();
 
-    return 0;
-    //return app->run(window);
+    return app->run(window);
 }
 
-void timerTests() {
+int timerTests() {
     sw::Timer t;
     t.start();
 
@@ -33,4 +33,7 @@ void timerTests() {
     t.start();
     std::this_thread::sleep_for(150ms);
     std::cout << t.elapsed() << '\n' << t.lap() << '\n';
+    std::cout << t.formatTime(3601687350) << '\n';
+
+    return 0;
 }

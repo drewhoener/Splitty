@@ -10,8 +10,7 @@ link_directories(${GTKMM_LIBRARY_DIRS})
 
 include_directories(${GTKMM_INCLUDE_DIRS})
 
-set(SOURCE_FILES Splitty.cpp view/SplitWindow.cpp view/SplitWindow.h util/Timer.cpp util/Timer.h)
+set(SOURCE_FILES Splitty.cpp view/SplitWindow.cpp view/SplitWindow.h timing/Timer.cpp timing/Timer.h util/SplitUtils.cpp util/SplitUtils.h timing/TimerThread.cpp timing/TimerThread.h)
 add_executable(Splitty ${SOURCE_FILES})
 
-target_link_libraries(Splitty
-        ${GTKMM_LIBRARIES}  )
+target_link_libraries(Splitty ${GTKMM_LIBRARIES} pthread)
