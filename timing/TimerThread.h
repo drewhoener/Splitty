@@ -6,8 +6,10 @@
 #define SPLITTY_TIMERTHREAD_H
 
 #include <mutex>
-#include "../view/SplitWindow.h"
+#include <glibmm/ustring.h>
 #include "Timer.h"
+
+class SplitWindow;
 
 class TimerThread {
 
@@ -16,7 +18,7 @@ public:
 
     ~TimerThread();
 
-    void pullData(std::string *str);
+    void pullData(Glib::ustring *str);
 
     void loopTimer(SplitWindow *window);
 

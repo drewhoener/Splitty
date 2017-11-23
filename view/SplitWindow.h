@@ -12,7 +12,6 @@
 #include <gtkmm/textview.h>
 #include <thread>
 #include <giomm.h>
-#include "../timing/Timer.h"
 #include "../timing/TimerThread.h"
 
 
@@ -20,6 +19,7 @@ class SplitWindow : public Gtk::Window {
 
 public:
     SplitWindow();
+
     ~SplitWindow() override;
 
     void emit();

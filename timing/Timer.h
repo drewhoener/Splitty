@@ -16,11 +16,17 @@ namespace sw {
 
     public:
         Timer();
+
         void start();
+
         unsigned long elapsed();
+
         void pause();
+
         unsigned long lap();
+
         unsigned long stop();
+
         void reset();
 
         std::string formatTime(unsigned long millis);
@@ -40,6 +46,7 @@ namespace sw {
         time_point<high_resolution_clock, duration<double>> lapEnd_;
 
         void updateTime();
+
         void updateLap();
     };
 

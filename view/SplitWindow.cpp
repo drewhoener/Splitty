@@ -11,8 +11,7 @@ SplitWindow::SplitWindow() :
         headerBox_(Gtk::ORIENTATION_HORIZONTAL),
         tableBox_(Gtk::ORIENTATION_VERTICAL),
         footerBox_(Gtk::ORIENTATION_HORIZONTAL),
-        stopwatchLabel_("00:00:00.000", true),
-        timerThread_() {
+        stopwatchLabel_("00:00:00.000", true) {
 
     set_title("Splitty");
 
@@ -56,6 +55,7 @@ SplitWindow::~SplitWindow() = default;
 
 bool SplitWindow::on_key_press_event(GdkEventKey *key_event) {
 
+    //timerThread_.loopTimer(this);
 
     return Gtk::Window::on_key_press_event(key_event);
 }

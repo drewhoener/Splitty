@@ -3,6 +3,7 @@
 //
 
 #include "TimerThread.h"
+#include "../view/SplitWindow.h"
 
 TimerThread::TimerThread() : timer_(), mutex_() {
     timer_.reset();
@@ -10,7 +11,7 @@ TimerThread::TimerThread() : timer_(), mutex_() {
 
 TimerThread::~TimerThread() = default;
 
-void TimerThread::pullData(std::string *str) {
+void TimerThread::pullData(Glib::ustring *str) {
 
     std::lock_guard<std::mutex> lock(mutex_);
     if (str)
