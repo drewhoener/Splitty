@@ -47,6 +47,8 @@ SplitWindow::SplitWindow() :
 
     dispatcher_.connect(sigc::mem_fun(*this, &SplitWindow::onDispatchEmit));
 
+    add_events(Gdk::KEY_PRESS_MASK);
+
     show_all_children();
     set_keep_above(true);
 
