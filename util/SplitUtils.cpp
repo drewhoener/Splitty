@@ -20,3 +20,14 @@ Pango::FontDescription SpUtils::getFont(
     return fontDescription;
 }
 
+Pango::FontDescription SpUtils::getAbsoluteFont(const std::string &desc, double size, Pango::Stretch stretch,
+                                                Pango::Weight weight) {
+
+    Pango::FontDescription fontDescription(desc);
+    fontDescription.set_stretch(stretch);
+    fontDescription.set_weight(weight);
+    fontDescription.set_absolute_size(size);
+
+    return fontDescription;
+}
+

@@ -17,7 +17,7 @@ SplitWindow::SplitWindow() :
     set_title("Splitty");
 
     //set_size_request(350, 450);
-    footerBox_.set_size_request(300, 100);
+    footerBox_.set_size_request(252, 50);
 
     //Add grid to main window
     add(mainGrid_);
@@ -39,11 +39,13 @@ SplitWindow::SplitWindow() :
 
     stopwatchLabel_.set_halign(Gtk::ALIGN_END);
     stopwatchLabel_.set_padding(7, 0);
+    stopwatchLabel_.set_vexpand(true);
 
 
     stopwatchLabel_.override_font(
-            SpUtils::getFont("Liberation Mono", 40, Pango::STRETCH_ULTRA_EXPANDED, Pango::WEIGHT_ULTRABOLD));
+            SpUtils::getFont("Century Gothic", 33, Pango::STRETCH_ULTRA_EXPANDED, Pango::WEIGHT_ULTRABOLD));
     footerBox_.pack_end(stopwatchLabel_, true, true);
+
 
     dispatcher_.connect(sigc::mem_fun(*this, &SplitWindow::onDispatchEmit));
 

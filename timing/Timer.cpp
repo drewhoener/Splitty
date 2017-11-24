@@ -99,6 +99,8 @@ std::string sw::Timer::formatTime(unsigned long millis) {
             mins.insert(0, "0");
     millis /= 60;
     std::string hours = millis == 0 ? "" : (std::to_string(millis) + ":");
+    if (mins.length() == 0 && hours.length() > 0)
+        mins = "00";
 
     return (hours + mins + seconds + remMillis);
 }

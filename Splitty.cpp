@@ -15,7 +15,8 @@ int main(int argc, char *argv[]) {
     auto app = Gtk::Application::create(argc, argv, "com.drewhoener.splitty");
 
     SplitWindow window;
-
+    window.set_keep_above(true);
+    window.set_type_hint(Gdk::WINDOW_TYPE_HINT_DIALOG);
     //return timerTests();
 
     return app->run(window);

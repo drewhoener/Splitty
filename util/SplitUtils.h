@@ -10,6 +10,10 @@
 namespace SpUtils {
 
     Pango::FontDescription getFont(const std::string &desc, double size, Pango::Stretch stretch, Pango::Weight weight);
+
+    Pango::FontDescription
+    getAbsoluteFont(const std::string &desc, double size, Pango::Stretch stretch, Pango::Weight weight);
+
 }
 
 #endif //SPLITTY_SPLITUTILS_H
